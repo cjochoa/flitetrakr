@@ -1,0 +1,24 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'org.jetbrains:annotations:15.0'
+
+    testCompile 'junit:junit:4.11'
+    compile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'com.flitetrakr.adidas.challenge.Main'
+    }
+    baseName = 'FliteTrakr'
+    version = '0.1.0'
+}

@@ -1,0 +1,9 @@
+Connections: AMS-PDX-617,NUE-AMS-123, AMS-LHR-43,LHR-HKG-1235, NUE-FRA-61, FRA-HKG-1087, PDX-FRA-356, HKG-LHR-1190
+#1: What is the price of the connection NUE-FRA-HKG?
+#2: What is the price of the connection NUE-AMS-PDX-FRA-HKG-LHR?
+#3: What is the cheapest connection from AMS to HKG?
+#4: What is the cheapest connection from HKG to HKG?
+#5: How many different connections with maximum 3 stops exist between NUE and LHR?
+#6: How many different connections with minimum 1 stop exist between FRA and LHR?
+#7: How many different connections with exactly 2 stops exist between DXB and DXB?
+#8: Find all connections from AMS to LHR below 2500 Euros!
