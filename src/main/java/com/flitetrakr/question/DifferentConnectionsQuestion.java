@@ -1,9 +1,9 @@
-package com.flitetrakr.adidas.challenge.question;
+package com.flitetrakr.question;
 
-import com.flitetrakr.adidas.challenge.model.Airport;
-import com.flitetrakr.adidas.challenge.model.ConnectionGraph;
-import com.flitetrakr.adidas.challenge.model.Trip;
-import com.flitetrakr.adidas.challenge.model.DFSValidator;
+import com.flitetrakr.model.Airport;
+import com.flitetrakr.model.ConnectionGraph;
+import com.flitetrakr.model.Trip;
+import com.flitetrakr.model.DFSValidator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

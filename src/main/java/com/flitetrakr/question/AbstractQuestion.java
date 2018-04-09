@@ -1,4 +1,4 @@
-package com.flitetrakr.adidas.challenge.question;
+package com.flitetrakr.question;
 
 /**
  * This is an abstract class with common code for all questions.

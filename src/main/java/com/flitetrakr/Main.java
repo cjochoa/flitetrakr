@@ -1,10 +1,10 @@
-package com.flitetrakr.adidas.challenge;
+package com.flitetrakr;
 
-import com.flitetrakr.adidas.challenge.model.Airport;
-import com.flitetrakr.adidas.challenge.model.ConnectionGraph;
-import com.flitetrakr.adidas.challenge.model.FlightSegment;
-import com.flitetrakr.adidas.challenge.question.Question;
-import com.flitetrakr.adidas.challenge.question.QuestionFactory;
+import com.flitetrakr.model.Airport;
+import com.flitetrakr.model.ConnectionGraph;
+import com.flitetrakr.model.FlightSegment;
+import com.flitetrakr.question.Question;
+import com.flitetrakr.question.QuestionFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;

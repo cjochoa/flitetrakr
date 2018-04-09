@@ -1,6 +1,6 @@
 # FliteTrakr challenge
 
-In this challenge, we need to optimize out travel expenses looking for a way how to get the best out of our money and search for an optimized travel plan.  Main offices are located in Herzogenaurach (NUE), Canton, MA (BOS), Portland, OR (PDX), Amsterdam (AMS) and Hong Kong (HKG). Unfortunately not all airports are reachable from any other airport directly or stop-over flights are cheaper so that you also have to consider Frankfurt (FRA), London-Heathrow (LHR) and Dubai (DXB) cause in all of those there is a comfortable Lounge.
+In this challenge, we need to optimize out travel expenses looking for a way to get the best out of our money and search for an optimized travel plan.  Main offices are located in Herzogenaurach (NUE), Canton, MA (BOS), Portland, OR (PDX), Amsterdam (AMS) and Hong Kong (HKG). Unfortunately not all airports are reachable from any other airport directly or stop-over flights are cheaper so that you also have to consider Frankfurt (FRA), London-Heathrow (LHR) and Dubai (DXB) cause in all of those there is a comfortable Lounge.
 
 
 The current application reads in the current connection table including prices as the first line and being able to answer questions with every following line.
@@ -15,6 +15,38 @@ Questions have the form:
   -   _What is the cheapest connection from  **AMS**  to  **DXB**?_
    -   _How many different connections with (maximum|minimum|exactly) 3 stops exist between  **PDX**  and  **BOS**?_
     - _Find all connections from  **AMS**  to  **LHR**  below 2500 Euros!_
+
+## Example
+
+given the following input:
+
+```
+Connection: NUE-FRA-43, NUE-AMS-67, FRA-AMS-17, FRA-LHR-27, LHR-NUE-23
+#1: What is the price of the connection NUE-FRA-LHR?
+#2: What is the price of the connection NUE-AMS-LHR?
+#3: What is the price of the connection NUE-FRA-LHR-NUE?
+#4: What is the cheapest connection from NUE to AMS?
+#5: What is the cheapest connection from AMS to FRA?
+#6: What is the cheapest connection form LHR to LHR?
+#7: How many different connections with maximum 3 stops exists between NUE and FRA?
+#8: How many different connections with exactly 1 stop exists between LHR and AMS?
+#9: Find all connections from NUE to LHR below 170 Euros!
+```
+
+Should produce the following output:
+
+```
+#1: 70
+#2: No such connection found!
+#3: 93
+#4: NUE-FRA-AMS-60
+#5: No such connection found!
+#6: LHR-NUE-FRA-LHR-93
+#7: 2
+#8: 1
+#9: NUE-FRA-LHR-70, NUE-FRA-LHR-NUE-FRA-LHR-163
+```
+
 
 ## Preconditions
 

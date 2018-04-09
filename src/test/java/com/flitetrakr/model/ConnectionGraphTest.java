@@ -1,4 +1,4 @@
-package com.flitetrakr.adidas.challenge.model;
+package com.flitetrakr.model;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
-package com.flitetrakr.adidas.challenge.question;
+package com.flitetrakr.question;
 
-import com.flitetrakr.adidas.challenge.model.Airport;
+import com.flitetrakr.model.Airport;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

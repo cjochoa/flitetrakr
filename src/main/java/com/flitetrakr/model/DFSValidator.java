@@ -1,4 +1,4 @@
-package com.flitetrakr.adidas.challenge.model;
+package com.flitetrakr.model;
 
 /**
  * This interface is intended to implement lambda expressions that can

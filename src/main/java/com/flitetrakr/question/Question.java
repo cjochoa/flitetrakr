@@ -1,7 +1,7 @@
-package com.flitetrakr.adidas.challenge.question;
+package com.flitetrakr.question;
 
-import com.flitetrakr.adidas.challenge.model.ConnectionGraph;
-import com.flitetrakr.adidas.challenge.model.Trip;
+import com.flitetrakr.model.ConnectionGraph;
+import com.flitetrakr.model.Trip;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
