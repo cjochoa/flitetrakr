@@ -17,7 +17,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'com.flitetrakr.adidas.challenge.Main'
+        attributes 'Main-Class' : 'com.flitetrakr.Main'
     }
     baseName = 'FliteTrakr'
     version = '0.1.0'

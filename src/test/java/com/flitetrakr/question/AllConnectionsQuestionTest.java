@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AllConnectionsQuestionTest {
 
@@ -28,24 +29,24 @@ public class AllConnectionsQuestionTest {
     @Test
     public void allConnectionsTest() throws Exception {
         final String line = "#78: Find all connections from FRA to LHR below 2500 Euros!";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof AllConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof AllConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(2, answer.size());
-        Assert.assertEquals("#78: FRA-NUE-LHR-1100, FRA-NUE-LHR-NUE-LHR-2200", question.toString(answer));
+        Assert.assertEquals("#78: FRA-NUE-LHR-1100, FRA-NUE-LHR-NUE-LHR-2200", question.get().toString(answer));
 
     }
 
     @Test
     public void noConnectionsTest() throws Exception {
         final String line = "#78: Find all connections from FRA to LHR below 300 Euros!";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof AllConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof AllConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(0, answer.size());
-        Assert.assertEquals("#78: No connections found!", question.toString(answer));
+        Assert.assertEquals("#78: No connections found!", question.get().toString(answer));
 
     }
 }

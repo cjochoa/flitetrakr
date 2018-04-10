@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
         //System.out.println(String.format("%d find all connections between %s below %d Euros", questionNumber, Arrays.toString(this.airportList.toArray()) , this.price));
         List<Trip> tripList = new ArrayList<>();
         for (final Trip trip : graph.getAllTrips(source, destination, true, (Trip trip) -> trip.getPrice() < this.price)) {
-            if (trip.getDestination() != null && trip.getDestination().equals(destination)) {
+            if (trip.getDestination().isPresent() && trip.getDestination().get().equals(destination)) {
                 tripList.add(trip);
             }
         }

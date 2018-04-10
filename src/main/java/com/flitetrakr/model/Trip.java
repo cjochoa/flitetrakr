@@ -2,12 +2,8 @@ package com.flitetrakr.model;
 
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,24 +29,22 @@ public final class Trip {
      * Gets the initial airport where this trip starts.
      * @return initial airport
      */
-    @Nullable
-    public Airport getSource() {
+    public Optional<Airport> getSource() {
         if (segments.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
-        return segments.get(0).getSource();
+        return Optional.of(segments.get(0).getSource());
     }
 
     /**
      * Gets the final airport where this trip ends.
      * @return final airport
      */
-    @Nullable
-    public  Airport getDestination() {
+    public  Optional<Airport> getDestination() {
         if (segments.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
-        return segments.get(segments.size()-1).getDestination();
+        return Optional.of(segments.get(segments.size()-1).getDestination());
     }
 
     /**
@@ -60,7 +54,7 @@ public final class Trip {
      * @return True if the segment can be added, false otherwise
      */
     public boolean addSegment(@NotNull final FlightSegment segment) {
-        if (!segments.isEmpty() && getDestination() != segment.getSource()) {
+        if (!segments.isEmpty() && getDestination().isPresent() && getDestination().get() != segment.getSource()) {
             return false;
         }
         // else add this segment
@@ -71,12 +65,11 @@ public final class Trip {
      * Removes the last segment in the trip and returns it.
      * @return the last segment, null if the trip has no segment.
      */
-    @Nullable
-    public  FlightSegment removeLastSegment() {
+    public  Optional<FlightSegment> removeLastSegment() {
         if (segments.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
-        return segments.remove(segments.size()-1);
+        return Optional.of(segments.remove(segments.size()-1));
     }
 
     /**

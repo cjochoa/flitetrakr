@@ -39,7 +39,7 @@ import java.util.List;
         int cheapestPrice = Integer.MAX_VALUE;
         List<Trip> result = new ArrayList<>();
         Trip cheapestTrip = null;
-        for (final Trip trip : graph.getAllTrips(source, destination, source.equals(destination), (Trip trip) -> (source.equals(destination) && destination.equals(trip.getDestination()) ) || !trip.containsLoops())) {
+        for (final Trip trip : graph.getAllTrips(source, destination, source.equals(destination), (Trip trip) -> (source.equals(destination) && trip.getDestination().isPresent() && destination.equals(trip.getDestination().get()) ) || !trip.containsLoops())) {
             // System.out.println(String.format("Trip: %s", trip));
             if (trip.getPrice() < cheapestPrice) {
                 cheapestTrip = trip;

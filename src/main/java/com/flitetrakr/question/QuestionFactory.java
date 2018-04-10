@@ -3,10 +3,10 @@ package com.flitetrakr.question;
 import com.flitetrakr.model.Airport;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,14 +60,13 @@ public final class QuestionFactory {
         return result;
     }
 
-    @Nullable
-    public static Question getQuestion(@NotNull final String line) {
+    public static Optional<Question> getQuestion(@NotNull final String line) {
         Matcher m = connectionPricePattern.matcher(line);
         if (m.find()) {
             // note that m.group(1) is a number, since this is ensured by the RE
             final int questionNumber = Integer.valueOf(m.group(1));
 
-            return new ConnectionPriceQuestion(questionNumber, extractAirports(m.group(2), "-"));
+            return Optional.of(new ConnectionPriceQuestion(questionNumber, extractAirports(m.group(2), "-")));
         }
 
         m = cheapestPricePattern.matcher(line);
@@ -78,9 +77,9 @@ public final class QuestionFactory {
 
             if (airports.size() != 2) {
                 System.out.println("Wrong number of airports in " + line);
-                return null;
+                return Optional.empty();
             }
-            return new CheapestQuestion(questionNumber, airports.get(0), airports.get(1));
+            return Optional.of(new CheapestQuestion(questionNumber, airports.get(0), airports.get(1)));
         }
 
         m = allConnectionsPattern.matcher(line);
@@ -91,9 +90,9 @@ public final class QuestionFactory {
 
             if (airports.size() != 2) {
                 System.out.println("Wrong number of airports in " + line);
-                return null;
+                return Optional.empty();
             }
-            return new AllConnectionsQuestion(questionNumber, airports.get(0), airports.get(1), Integer.valueOf(m.group(3)));
+            return Optional.of(new AllConnectionsQuestion(questionNumber, airports.get(0), airports.get(1), Integer.valueOf(m.group(3))));
         }
 
         m = differentConnectionsPattern.matcher(line);
@@ -110,15 +109,15 @@ public final class QuestionFactory {
 
                 if (airports.size() != 2) {
                     System.out.println("Wrong number of airports in " + line);
-                    return null;
+                    return Optional.empty();
                 }
-                return new DifferentConnectionsQuestion(questionNumber, airports.get(0), airports.get(1), comparisonOperator, stops);
+                return Optional.of(new DifferentConnectionsQuestion(questionNumber, airports.get(0), airports.get(1), comparisonOperator, stops));
             } catch (final IllegalArgumentException ex) {
                 System.out.println(ex.getMessage());
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
 }

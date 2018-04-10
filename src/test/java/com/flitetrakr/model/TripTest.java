@@ -11,12 +11,14 @@ public class TripTest {
         Assert.assertEquals(0, trip.getStopsNumber());
         trip.addSegment(new FlightSegment(Airport.BOS, Airport.DXB, 675));
         Assert.assertEquals(1, trip.getStopsNumber());
-        Assert.assertEquals(Airport.AMS, trip.getSource());
-        Assert.assertEquals(Airport.DXB, trip.getDestination());
+        Assert.assertTrue(trip.getSource().isPresent());
+        Assert.assertEquals(Airport.AMS, trip.getSource().get());
+        Assert.assertTrue(trip.getDestination().isPresent());
+        Assert.assertEquals(Airport.DXB, trip.getDestination().get());
         trip.removeLastSegment();
         Assert.assertEquals(0, trip.getStopsNumber());
-        Assert.assertEquals(Airport.AMS, trip.getSource());
-        Assert.assertEquals(Airport.BOS, trip.getDestination());
+        Assert.assertEquals(Airport.AMS, trip.getSource().get());
+        Assert.assertEquals(Airport.BOS, trip.getDestination().get());
         trip.removeLastSegment();
     }
 

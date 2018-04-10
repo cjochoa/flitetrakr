@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DifferentConnectionsQuestionTest {
     private ConnectionGraph graph;
@@ -30,38 +31,38 @@ public class DifferentConnectionsQuestionTest {
     @Test
     public void maximumConnectionsTest() throws Exception {
         final String line = "#1: How many different connections with maximum 3 stops exist between AMS and FRA?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof DifferentConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof DifferentConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(4, answer.size());
         Assert.assertEquals("[AMS-LHR-NUE-LHR-FRA-1600, AMS-LHR-FRA-500, AMS-FRA-400, AMS-FRA-NUE-LHR-FRA-1700]", answer.toString());
-        Assert.assertEquals("#1: 4", question.toString(answer));
+        Assert.assertEquals("#1: 4", question.get().toString(answer));
 
     }
 
     @Test
     public void noConnectionsTest() throws Exception {
         final String line = "#1: How many different connections with maximum 1 stop exist between NUE and AMS?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof DifferentConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof DifferentConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(0, answer.size());
-        Assert.assertEquals("#1: 0", question.toString(answer));
+        Assert.assertEquals("#1: 0", question.get().toString(answer));
 
     }
 
     @Test
     public void exactlyConnectionsTest() throws Exception {
         final String line = "#1: How many different connections with exactly 1 stop exist between AMS and FRA?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof DifferentConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof DifferentConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(1, answer.size());
         Assert.assertEquals("[AMS-LHR-FRA-500]", answer.toString());
-        Assert.assertEquals("#1: 1", question.toString(answer));
+        Assert.assertEquals("#1: 1", question.get().toString(answer));
 
     }
 
@@ -72,10 +73,10 @@ public class DifferentConnectionsQuestionTest {
     @Test
     public void minimumConnectionsTest() {
         final String line = "#1: How many different connections with minimum 2 stops exist between AMS and LHR?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof DifferentConnectionsQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof DifferentConnectionsQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertTrue(answer.isEmpty());
     }
 }

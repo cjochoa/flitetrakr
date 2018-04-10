@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ConnectionPriceQuestionTest {
 
@@ -27,22 +28,22 @@ public class ConnectionPriceQuestionTest {
     @Test
     public void getPriceTest() throws Exception {
         final String line = "#1: What is the price of the connection AMS-LHR-NUE-LHR?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof ConnectionPriceQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof ConnectionPriceQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(1, answer.size());
-        Assert.assertEquals("#1: 1400", question.toString(answer));
+        Assert.assertEquals("#1: 1400", question.get().toString(answer));
     }
 
     @Test
     public void getInvalidPriceTest() throws Exception {
         final String line = "#12: What is the price of the connection NUE-AMS-BOS?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof ConnectionPriceQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question>  question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof ConnectionPriceQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(0, answer.size());
-        Assert.assertEquals("#12: No such connection found!", question.toString(answer));
+        Assert.assertEquals("#12: No such connection found!", question.get().toString(answer));
     }
 }

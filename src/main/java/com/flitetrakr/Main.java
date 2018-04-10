@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,9 +86,9 @@ public class Main {
                     populateConnectionGraph(connections, line.substring(ConnectionsPrefix.length()+1).trim());
                 } else {
                     // assume line is a question. If not a question, then it will be discarded
-                    final Question question = QuestionFactory.getQuestion(line);
-                    if (question != null) {
-                        questions.add(question);
+                    final Optional<Question> question = QuestionFactory.getQuestion(line);
+                    if (question.isPresent()) {
+                        questions.add(question.get());
                     } else {
                         // no valid question, print error and ignore line
                         System.out.println(line + " is not a valid question");

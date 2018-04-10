@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 public class CheapestQuestionTest {
 
@@ -28,40 +29,40 @@ public class CheapestQuestionTest {
     @Test
     public void processWrongQuestionTest() throws Exception {
         final String line = "";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNull(question);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertFalse(question.isPresent());
     }
 
     @Test
     public void cheapestFlightTest() throws Exception {
         final String line = "#7: What is the cheapest connection from AMS to NUE?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof CheapestQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof CheapestQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(1, answer.size());
-        Assert.assertEquals("#7: AMS-LHR-NUE-800", question.toString(answer));
+        Assert.assertEquals("#7: AMS-LHR-NUE-800", question.get().toString(answer));
 
     }
 
     @Test
     public void loopTest() throws Exception {
         final String line = "#25: What is the cheapest connection from NUE to NUE?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof CheapestQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof CheapestQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertEquals(1, answer.size());
-        Assert.assertEquals("#25: NUE-LHR-NUE-1100", question.toString(answer));
+        Assert.assertEquals("#25: NUE-LHR-NUE-1100", question.get().toString(answer));
     }
 
     @Test
     public void noConnectionFlightTest() throws Exception {
         final String line = "#1: What is the cheapest connection from NUE to AMS?";
-        final Question question = QuestionFactory.getQuestion(line);
-        Assert.assertNotNull(question);
-        Assert.assertTrue(question instanceof CheapestQuestion);
-        final List<Trip> answer = question.processQuestion(graph);
+        final Optional<Question> question = QuestionFactory.getQuestion(line);
+        Assert.assertTrue(question.isPresent());
+        Assert.assertTrue(question.get() instanceof CheapestQuestion);
+        final List<Trip> answer = question.get().processQuestion(graph);
         Assert.assertTrue( answer.isEmpty());
 
     }
